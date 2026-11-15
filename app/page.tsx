@@ -1,0 +1,57 @@
+import Link from "next/link";
+import { Header } from "./components";
+import { PageEntrance, Reveal } from "./motion";
+
+export default function Home() {
+  return (
+    <PageEntrance>
+      <main>
+        <div className="bg-trikaaya-dark text-white">
+          <Header />
+          <section className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-24 pt-16 md:grid-cols-2 md:px-8 md:pb-32 md:pt-24">
+            <div className="hero-copy">
+              <p className="mb-6 text-xs font-extrabold uppercase tracking-[.32em] text-trikaaya-lemon hero-kicker">TRI · FORM · BODY</p>
+              <h1 className="hero-title max-w-2xl text-5xl font-extrabold leading-[1.04] tracking-[-.055em] md:text-7xl">Train with purpose.<br/><span className="text-trikaaya-lemon">Grow beyond limits.</span></h1>
+              <p className="hero-subtitle mt-7 max-w-xl text-base leading-8 text-white/65 md:text-lg">Building strength, discipline and confidence through Taekwondo training.</p>
+              <div className="hero-actions mt-9 flex flex-wrap gap-3">
+                <Link href="/register/parent" className="button-primary rounded-full bg-trikaaya-lemon px-7 py-4 text-sm font-extrabold text-trikaaya-dark">Join as Parent ↗</Link>
+                <Link href="/register/coach" className="button-dark-outline rounded-full border border-white/25 px-7 py-4 text-sm font-bold text-white">Join as Coach</Link>
+              </div>
+            </div>
+            <div className="hero-art relative min-h-[330px] overflow-hidden rounded-[2rem] border border-white/15 bg-white/[.04] p-8 md:min-h-[440px] md:p-12" aria-label="Trikaaya brand visual">
+              <div className="hero-orbit hero-orbit-one absolute -right-12 -top-12 h-64 w-64 rounded-full border border-trikaaya-lemon/30"/>
+              <div className="hero-orbit hero-orbit-two absolute right-10 top-12 h-52 w-52 rounded-full border border-trikaaya-lemon/20"/>
+              <div className="absolute bottom-10 left-8 right-8 border-t border-white/20 pt-6">
+                <p className="text-xs font-bold uppercase tracking-[.3em] text-trikaaya-lemon">Discipline · Focus · Confidence</p>
+                <h2 className="mt-4 text-4xl font-extrabold tracking-tight md:text-5xl">Shape your<br/>stronger self.</h2>
+              </div>
+              <div className="hero-core absolute left-1/2 top-1/3 h-24 w-24 -translate-x-1/2 -rotate-12 rounded-3xl bg-trikaaya-lemon shadow-[0_0_90px_rgba(232,239,99,.22)]"/>
+            </div>
+          </section>
+        </div>
+        <Reveal><section id="about" className="mx-auto max-w-7xl px-5 py-24 md:px-8">
+          <p className="text-xs font-extrabold uppercase tracking-[.3em] text-trikaaya-olive">01 / About Trikaaya</p>
+          <h2 className="mt-6 max-w-3xl text-4xl font-extrabold leading-tight tracking-[-.04em] md:text-6xl">A stronger body.<br/><span className="text-trikaaya-olive">A sharper mindset.</span></h2>
+          <p className="mt-7 max-w-2xl text-base leading-8 text-trikaaya-dark/65">Trikaaya Sports helps students develop fitness, focus, respect and self-confidence through structured sports training.</p>
+        </section></Reveal>
+        <Reveal><section id="taekwondo" className="bg-white px-5 py-20 md:px-8">
+          <div className="mx-auto max-w-7xl">
+            <p className="text-xs font-extrabold uppercase tracking-[.3em] text-trikaaya-olive">02 / Our programme</p>
+            <div className="mt-5 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+              <h2 className="text-4xl font-extrabold tracking-tight md:text-6xl">Taekwondo</h2>
+              <p className="max-w-xl leading-8 text-trikaaya-dark/60">Learn balance, movement, discipline and self-defence through a martial art built on skill and respect.</p>
+            </div>
+            <Link href="/register/parent" className="button-primary mt-9 inline-flex rounded-full bg-trikaaya-dark px-7 py-4 text-sm font-extrabold text-white">Enquire to join ↗</Link>
+          </div>
+        </section></Reveal>
+        <footer id="contact" className="bg-trikaaya-dark px-5 py-14 text-white">
+          <div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 md:flex-row">
+            <div><p className="text-2xl font-extrabold">Trikaaya Sports</p><p className="mt-2 text-xs font-bold tracking-[.3em] text-trikaaya-lemon">TRI · FORM · BODY</p></div>
+            <div className="text-sm leading-8 text-white/65"><p>+91 99702 97708</p><p>Info@trikaaya.com</p></div>
+            <p className="text-xs text-white/40">© {new Date().getFullYear()} Trikaaya Sports</p>
+          </div>
+        </footer>
+      </main>
+    </PageEntrance>
+  );
+}
