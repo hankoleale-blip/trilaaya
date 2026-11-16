@@ -1,33 +1,33 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/$/, "");
 const COOKIE_NAME = "trikaaya_admin_session";
 
-export async function middleware(request: NextRequest) {
-  // /admin is the public login page; every nested Admin route requires a valid session.
-  if (request.nextUrl.pathname === "/admin" || request.nextUrl.pathname === "/admin/") {
+export function middleware(request: NextRequest) {
+  // Allow the Admin login page without authentication.
+  if (
+    request.nextUrl.pathname === "/admin" ||
+    request.nextUrl.pathname === "/admin/"
+  ) {
     return NextResponse.next();
   }
+
+  // Check whether the Admin session cookie exists.
   const token = request.cookies.get(COOKIE_NAME)?.value;
-  if (!token) return redirectToLogin(request);
 
-  try {
-    const response = await fetch(`${API_URL}/admin/auth/me`, {
-      headers: { cookie: `${COOKIE_NAME}=${token}` },
-      cache: "no-store",
-    });
-    if (response.ok) return NextResponse.next();
-  } catch {
-    // Fail closed: protected Admin pages are unavailable when session validation cannot be reached.
+  // Redirect users without a session to the Admin login page.
+  if (!token) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/admin";
+    url.search = "";
+
+    return NextResponse.redirect(url);
   }
-  return redirectToLogin(request);
+
+  // Do not call the Render backend from middleware.
+  // Backend authentication is handled by the Admin API routes.
+  return NextResponse.next();
 }
 
-function redirectToLogin(request: NextRequest) {
-  const url = request.nextUrl.clone();
-  url.pathname = "/admin";
-  url.search = "";
-  return NextResponse.redirect(url);
-}
-
-export const config = { matcher: ["/admin/:path*"] };
+export const config = {
+  matcher: ["/admin/:path*"],
+};
